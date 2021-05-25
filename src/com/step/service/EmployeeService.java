@@ -12,14 +12,14 @@ public class EmployeeService {
        Scanner scanner=new Scanner(System.in);
        MeniuOptions meniuOptions;
 
-       while (true) {
+
            System.out.println("\t\t\t Hello user");
            System.out.println("\t\t===========================");
            System.out.println("\t\t\t Please type options");
-           System.out.println("CREATE =  create employee");
-           System.out.println("READ   =  read employee");
-           System.out.println("UPDATE =  update employee");
-           System.out.println("DELETE =  delete employee");
+           System.out.println("CREATE =  Create employee");
+           System.out.println("READ   =  Read employee");
+           System.out.println("UPDATE =  Update employee");
+           System.out.println("DELETE =  Delete employee");
            String selectOption=scanner.nextLine();
            meniuOptions=MeniuOptions.valueOf(selectOption);
 
@@ -30,7 +30,7 @@ public class EmployeeService {
                case UPDATE:this.udateEmployee();break;
               // case DELETE:this;
            }
-       }
+
    }
 
     public  void createEmployee(){
@@ -43,7 +43,6 @@ public class EmployeeService {
         {
             System.out.println("Enter name of "+(i+1) +" employee");
             String nameEmployee=scanner.next();
-
             System.out.println("Enter LASTNAME of "+(i+1)+ "employee");
             String lastNameEmployee=scanner.next();
             System.out.println("Enter SEX of "+(i+1)+"employee");
@@ -55,15 +54,18 @@ public class EmployeeService {
             em[i]=new Employee(nameEmployee,lastNameEmployee,idnpEmployee,sexEmployee,stage);
 
         }
+        this.showMenu();
 
     }
     public void readEmployee() {
         try {
             if (em.equals(null)) {
-                System.out.printf("Employee does not exit");
+                System.out.println("Employee does not exit");
             } else {
                 for (int i = 0; i < em.length; i++) {
-                    System.out.println("Employee [ " + i + " ]" + em[i].getName() + " " + em[i].getLastname() + " " + em[i].getSex());
+                    System.out.println("Employee [ " + i +1+ " ]" + em[i].getName() + " " + em[i].getLastname() + " " + em[i].getSex());
+                this.showMenu();
+
                 }
             }
         }catch (Exception ex)
@@ -73,7 +75,6 @@ public class EmployeeService {
     }
     public void udateEmployee()
     {
-
         while(true) {
             System.out.println("Enter id employee to update");
             Scanner sc = new Scanner(System.in);
@@ -94,13 +95,17 @@ public class EmployeeService {
             System.out.println("ENTER 2. LasName employee");
             System.out.println("ENTER 4. Sex employee");
             System.out.println("ENTER 5. Stage employee");
+            System.out.println("ENTER 6. EXIT");
             System.out.println("--------------------------------");
 
             int selectOption = sc.nextInt();
             switch (selectOption) {
                 case 1: {
-                    System.out.println("Enter new name:");
-                    em[idd].setName(sc.nextLine());
+                    System.out.println("Enter new name employee:");
+                    em[--idd].setName(sc.nextLine());break;
+                }
+                case 6:{
+                    break;
                 }
 
             }
