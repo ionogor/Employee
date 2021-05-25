@@ -2,6 +2,7 @@ package com.step.service;
 
 import com.step.employee.Employee;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class EmployeeService {
@@ -11,8 +12,9 @@ public class EmployeeService {
    {
        Scanner scanner=new Scanner(System.in);
        MeniuOptions meniuOptions;
-
-
+        boolean verifInput=false;
+        while(!verifInput)
+        {
            System.out.println("\t\t\t Hello user");
            System.out.println("\t\t===========================");
            System.out.println("\t\t\t Please type options");
@@ -20,16 +22,29 @@ public class EmployeeService {
            System.out.println("READ   =  Read employee");
            System.out.println("UPDATE =  Update employee");
            System.out.println("DELETE =  Delete employee");
-           String selectOption=scanner.nextLine();
-           meniuOptions=MeniuOptions.valueOf(selectOption);
 
-           switch (meniuOptions)
-           {
-               case CREATE: this.createEmployee();break;
-               case READ:this.readEmployee();break;
-               case UPDATE:this.udateEmployee();break;
-              // case DELETE:this;
+           String selectOption=scanner.nextLine().toUpperCase(Locale.ROOT);
+
+           try{
+               meniuOptions=MeniuOptions.valueOf(selectOption);
+
+               switch (meniuOptions)
+               {
+                   case CREATE: this.createEmployee();break;
+                   case READ:this.readEmployee();break;
+                   case UPDATE:this.udateEmployee();break;
+                   // case DELETE:this;
+               }
+
            }
+           catch (Exception ex)
+           {
+
+           }
+
+
+
+        }
 
    }
 
@@ -43,12 +58,16 @@ public class EmployeeService {
         {
             System.out.println("Enter name of "+(i+1) +" employee");
             String nameEmployee=scanner.next();
-            System.out.println("Enter LASTNAME of "+(i+1)+ "employee");
+
+            System.out.println("Enter LASTNAME of "+(i+1)+ " employee");
             String lastNameEmployee=scanner.next();
-            System.out.println("Enter SEX of "+(i+1)+"employee");
-            String sexEmployee=scanner.nextLine();
-            System.out.println("Enter IDNP of "+(i+1)+"employee");
-            String idnpEmployee=scanner.nextLine();
+
+            System.out.println("Enter SEX of "+(i+1)+" employee");
+            String sexEmployee=scanner.next();
+
+            System.out.println("Enter IDNP of "+(i+1)+" employee");
+            String idnpEmployee=scanner.next();
+
             System.out.println("Enter STAGE of "+(i+1)+"employee");
             int stage=scanner.nextInt();
             em[i]=new Employee(nameEmployee,lastNameEmployee,idnpEmployee,sexEmployee,stage);
@@ -79,7 +98,10 @@ public class EmployeeService {
             System.out.println("Enter id employee to update");
             Scanner sc = new Scanner(System.in);
             int idd = sc.nextInt();
-
+        if(em.equals(null))
+        {
+            System.out.println("ERROR NO OBJECT FOUND!!!");
+        }else {
             for (int i = 0; i < em.length; i++) {
                 if (em[i].getId() == idd) {
                     System.out.println(em[i]);
@@ -89,6 +111,7 @@ public class EmployeeService {
                     return;
 
             }
+        }
             System.out.println("What you want to update ?");
             System.out.println("---------Select Option----------");
             System.out.println("ENTER 1. Name employee");
