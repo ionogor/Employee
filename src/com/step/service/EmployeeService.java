@@ -22,27 +22,34 @@ public class EmployeeService {
            System.out.println("READ   =  Read employee");
            System.out.println("UPDATE =  Update employee");
            System.out.println("DELETE =  Delete employee");
+           System.out.println("EXIT =  EXIT PROGRAM");
 
            String selectOption=scanner.nextLine().toUpperCase(Locale.ROOT);
+        if (selectOption=="EXIT")
+        {
+          verifInput=true;
+        }
+        else {
+            try {
+                meniuOptions = MeniuOptions.valueOf(selectOption);
 
-           try{
-               meniuOptions=MeniuOptions.valueOf(selectOption);
+                switch (meniuOptions) {
+                    case CREATE:
+                        this.createEmployee();
+                        break;
+                    case READ:
+                        this.readEmployee();
+                        break;
+                    case UPDATE:
+                        this.udateEmployee();
+                        break;
+                    case DELETE:this.deleteEmployee();
+                }
 
-               switch (meniuOptions)
-               {
-                   case CREATE: this.createEmployee();break;
-                   case READ:this.readEmployee();break;
-                   case UPDATE:this.udateEmployee();break;
-                   // case DELETE:this;
-               }
+            } catch (Exception ex) {
 
-           }
-           catch (Exception ex)
-           {
-
-           }
-
-
+            }
+        }
 
         }
 
@@ -77,12 +84,14 @@ public class EmployeeService {
 
     }
     public void readEmployee() {
+
         try {
-            if (em.equals(null)) {
+            if (em==null) {
                 System.out.println("Employee does not exit");
             } else {
                 for (int i = 0; i < em.length; i++) {
-                    System.out.println("Employee [ " + i +1+ " ]" + em[i].getName() + " " + em[i].getLastname() + " " + em[i].getSex());
+
+                    System.out.println(em[i]);
                 this.showMenu();
 
                 }
@@ -98,9 +107,9 @@ public class EmployeeService {
             System.out.println("Enter id employee to update");
             Scanner sc = new Scanner(System.in);
             int idd = sc.nextInt();
-        if(em.equals(null))
+        if(em==null)
         {
-            System.out.println("ERROR NO OBJECT FOUND!!!");
+            System.out.println("ERROR NO OBJECT FOUND!!!");break;
         }else {
             for (int i = 0; i < em.length; i++) {
                 if (em[i].getId() == idd) {
@@ -109,7 +118,6 @@ public class EmployeeService {
                 }
                 else
                     return;
-
             }
         }
             System.out.println("What you want to update ?");
@@ -125,11 +133,13 @@ public class EmployeeService {
             switch (selectOption) {
                 case 1: {
                     System.out.println("Enter new name employee:");
-                    em[--idd].setName(sc.nextLine());break;
+                    em[idd].setName(sc.nextLine());break;
                 }
-                case 6:{
-                    break;
+                case 2: {
+                    System.out.println("Enter new lastname employee:");
+                    em[idd].setName(sc.nextLine());break;
                 }
+
 
             }
 
@@ -154,11 +164,10 @@ public class EmployeeService {
             catch (NullPointerException ex)
             {
                 System.out.printf("Element not exit, please try again");
-
+                  //  1 . verific daca exista asa element in array vechi
+                // 2. pe urma fac copiere in array nou
+                // 3 catch nu este nevoie... facem prin if sau metoda separata care verifica daca este elementul
             }
-
-
-
 
         }
 
