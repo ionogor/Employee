@@ -1,10 +1,13 @@
 package com.step;
 
+import com.step.Tests.Singelton;
 import com.step.employee.Employee;
 import com.step.service.EmployeeDB;
 import com.step.service.EmployeeService;
 import com.sun.deploy.util.ArrayUtil;
 
+import javax.swing.plaf.ScrollBarUI;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,33 +16,16 @@ public class Main {
 
     public static void main(String[] args) {
 
-      //  EmployeeService employeeService=new EmployeeService();
 
-       //employeeService.showMenu();
+            Singelton singelton=Singelton.getINSTANCE();
 
-        EmployeeDB employeeDB=new EmployeeDB();
 
-        //List<Employee> employeeList=new ArrayList<>();
-        Scanner scanner=new Scanner(System.in);
 
-        System.out.println("Enter name:");
-        String name=scanner.nextLine();
-        System.out.println("Enter surname:");
-        String surname=scanner.nextLine();
-        System.out.println("Enter idnp");
-        String idnp=scanner.nextLine();
-        employeeDB.create(new Employee(name,surname,idnp));
+       // singelton.showMessage();
 
-        List<Employee> listRead = employeeDB.read();
-        for (Employee employee: listRead)
-        {
-            System.out.println(employee);
-        }
+        //Singelton singelton1=Singelton.getINSTANCE();
 
-        Employee employee=listRead.get(7);
-
-       employeeDB.update(employee);
-
+        //singelton1.showMessage();
 
     }
 

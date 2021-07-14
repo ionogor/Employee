@@ -8,6 +8,7 @@ import jdk.internal.org.objectweb.asm.tree.TryCatchBlockNode;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class EmployeeDB {
 
@@ -53,6 +54,21 @@ public class EmployeeDB {
             System.out.println("Eroare de citire " + ex.getMessage());
         }
     }
+
+    public static Employee createEmployeeKeyboard()
+    {
+        Scanner scanner=new Scanner(System.in);
+        System.out.println("Enter name:");
+        String name=scanner.nextLine();
+        System.out.println("Enter surname:");
+        String surname=scanner.nextLine();
+        System.out.println("Enter idnp");
+        String idnp=scanner.nextLine();
+
+        Employee employee=new Employee(name,surname,idnp);
+        return  employee;
+    }
+
     /**
      * citirea employee
 
@@ -131,7 +147,7 @@ public class EmployeeDB {
                 preparedStatement.setString(3,employee.getIdnp());
 
                 int count=preparedStatement.executeUpdate();
-                String message=count==1 ? "A fost sters cu succes": "Nu a fost nimic inoit";
+                String message=count==1 ? "A fost inoit cu succes": "Nu a fost nimic inoit";
 
                 System.out.println(message);
 
